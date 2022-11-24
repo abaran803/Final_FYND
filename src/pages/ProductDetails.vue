@@ -1,13 +1,15 @@
 <template>
     <div>
-        <h1>Banner Component</h1>
+        Product with Pro_Id: {{$route.params.id}}
     </div>
 </template>
 
 <script>
 
 export default {
-    name: 'BannerVue'
+ 
+    name: 'ProductDetails'
+    
 }
 
 </script>

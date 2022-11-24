@@ -1,39 +1,31 @@
 <template>
     <div>
-        <h1>Categories</h1>
 
-        <!-- List of Categories -->
-        <div class="categories">
+        <!-- Items on the Page -->
+        <GridItems title="Categories" :items="categories" />
 
-            <!-- Each Category -->
-            <div v-for="e in categories" :key="e.id" class="category">
-
-                <!-- Category Image -->
-                <div class="category-image">{{e.image}}</div>
-                <!-- Category Name -->
-                <div class="category-name">{{e.name}}</div>
-
-            </div>
-        </div>
     </div>
 </template>
 
 <script>
+import GridItems from '@/components/GridItems.vue';
+
 
 export default {
-    name: 'CategoriesComp',
+    name: "CategoriesComp",
     data() {
         return {
             categories: [
-                {id: 1,image: 'Image Here', name: 'Name Here'},
-                {id: 2,image: 'Image Here', name: 'Name Here'},
-                {id: 3,image: 'Image Here', name: 'Name Here'},
-                {id: 4,image: 'Image Here', name: 'Name Here'},
-                {id: 5,image: 'Image Here', name: 'Name Here'},
-                {id: 6,image: 'Image Here', name: 'Name Here'}
+                { id: 1, image: "https://images-eu.ssl-images-amazon.com/images/G/31/IMG19/Furniture/WFH/QC/lapdesk_440x460.png", name: "Name Here" },
+                { id: 2, image: "https://images-eu.ssl-images-amazon.com/images/G/31/IMG19/Furniture/WFH/QC/lapdesk_440x460.png", name: "Name Here" },
+                { id: 3, image: "https://images-eu.ssl-images-amazon.com/images/G/31/IMG19/Furniture/WFH/QC/lapdesk_440x460.png", name: "Name Here" },
+                { id: 4, image: "https://images-eu.ssl-images-amazon.com/images/G/31/IMG19/Furniture/WFH/QC/lapdesk_440x460.png", name: "Name Here" },
+                { id: 5, image: "https://images-eu.ssl-images-amazon.com/images/G/31/IMG19/Furniture/WFH/QC/lapdesk_440x460.png", name: "Name Here" },
+                { id: 6, image: "https://images-eu.ssl-images-amazon.com/images/G/31/IMG19/Furniture/WFH/QC/lapdesk_440x460.png", name: "Name Here" }
             ]
-        }
-    }
+        };
+    },
+    components: { GridItems }
 }
 
 </script>

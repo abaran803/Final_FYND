@@ -1,77 +1,31 @@
 <template>
     <div>
 
-        <h1>Products</h1>
-
-        <!-- List of Products -->
-        <div class="products">
-            
-            <!-- Each Product -->
-            <div class="product" v-for="e in products" :key="e.id">
-
-                <!-- Product Image -->
-                <div class="product-image">{{e.image}}</div>
-
-                <!-- Product Name -->
-                <div class="product-name">{{e.name}}</div>
-
-                <!-- Product Category -->
-                <div>{{e.category}}</div>
-
-                <!-- Seller Name -->
-                <div class="seller-info" style="display: flex; justify-content: space-between; width: 80%; margin: auto;">
-                    <div>{{e.seller}}</div>
-                    <div>
-                        <div v-if="e.isTrusted">B</div>
-                    </div>
-                </div>
-
-                <!-- Product Price -->
-                <div>Price Here</div>
-            </div>
-        </div>
+        <GridItems title="Products" :items="products" />
+        
     </div>
 </template>
 
 <script>
+import GridItems from '@/components/GridItems.vue';
+
 
 export default {
-    name: 'ProductsComp',
+    name: "ProductsComp",
     data() {
         return {
             products: [
-                {  id: 1, image: 'Image Here', name: 'Name Here', category: 'Category Here', seller: 'Seller Name', isTrusted: true, price: 'Price Here' },
-                {  id: 2, image: 'Image Here', name: 'Name Here', category: 'Category Here', seller: 'Seller Name', isTrusted: true, price: 'Price Here' },
-                {  id: 3, image: 'Image Here', name: 'Name Here', category: 'Category Here', seller: 'Seller Name', isTrusted: false, price: 'Price Here' },
-                {  id: 4, image: 'Image Here', name: 'Name Here', category: 'Category Here', seller: 'Seller Name', isTrusted: true, price: 'Price Here' },
-                {  id: 5, image: 'Image Here', name: 'Name Here', category: 'Category Here', seller: 'Seller Name', isTrusted: false, price: 'Price Here' },
-                {  id: 6, image: 'Image Here', name: 'Name Here', category: 'Category Here', seller: 'Seller Name', isTrusted: false, price: 'Price Here' },
-                {  id: 6, image: 'Image Here', name: 'Name Here', category: 'Category Here', seller: 'Seller Name', isTrusted: false, price: 'Price Here' }
+                { id: 1, image: "https://m.media-amazon.com/images/I/81TEdpSNENL._AC_UL480_FMwebp_QL65_.jpg", name: "Name Here", category: "Category Here", seller: "Seller Name", isTrusted: true, price: "Price Here" },
+                { id: 2, image: "https://m.media-amazon.com/images/I/81cSniN1FHL._AC_UL480_FMwebp_QL65_.jpg", name: "Name Here", category: "Category Here", seller: "Seller Name", isTrusted: true, price: "Price Here" },
+                { id: 3, image: "https://m.media-amazon.com/images/I/71JcKHXSYfL._AC_UL480_FMwebp_QL65_.jpg", name: "Name Here", category: "Category Here", seller: "Seller Name", isTrusted: false, price: "Price Here" },
+                { id: 4, image: "https://m.media-amazon.com/images/I/61I6AZ3Q-bL._AC_UL480_FMwebp_QL65_.jpg", name: "Name Here", category: "Category Here", seller: "Seller Name", isTrusted: true, price: "Price Here" },
+                { id: 5, image: "https://m.media-amazon.com/images/I/81DM22NKVuL._AC_UL480_FMwebp_QL65_.jpg", name: "Name Here", category: "Category Here", seller: "Seller Name", isTrusted: false, price: "Price Here" },
+                { id: 6, image: "https://m.media-amazon.com/images/I/71vp8Lec9JL._AC_UL480_FMwebp_QL65_.jpg", name: "Name Here", category: "Category Here", seller: "Seller Name", isTrusted: false, price: "Price Here" },
+                { id: 7, image: "https://m.media-amazon.com/images/I/71zaAby0-FL._AC_UL480_FMwebp_QL65_.jpg", name: "Name Here", category: "Category Here", seller: "Seller Name", isTrusted: false, price: "Price Here" }
             ]
-        }
-    }
+        };
+    },
+    components: { GridItems }
 }
 
 </script>
-
-<style scoped>
-.products {
-    display: flex;
-    flex-wrap: wrap;
-    width: 80%;
-    margin: auto;
-    justify-content: center;
-    gap: 15px;
-}
-
-.product {
-    width: 220px;
-    height: 250px;
-    background-color: lightblue;
-}
-
-.product-image {
-    height: 70%;
-    background-color: lightgreen;
-}
-</style>

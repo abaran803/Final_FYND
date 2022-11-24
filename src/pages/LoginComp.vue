@@ -19,7 +19,7 @@ export default {
     data() {
         return {
             formDatas: [
-                { label: 'Username', type: 'text', placeholder: 'Enter Username', isRequired: true, id: 'username', model: 'username' },
+                { label: 'Username/Email', type: 'text', placeholder: 'Enter Username', isRequired: true, id: 'username', model: 'username' },
                 { label: 'Password', type: 'password', placeholder: 'Enter Password', isRequired: true, id: 'pass', model: 'password' },
             ],
             formData: {

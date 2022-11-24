@@ -1,13 +1,15 @@
 <template>
     <div>
-        <h1>Banner Component</h1>
+        <router-view></router-view>
     </div>
 </template>
 
 <script>
 
 export default {
-    name: 'BannerVue'
+
+    name: 'UploadData'
+
 }
 
 </script>
