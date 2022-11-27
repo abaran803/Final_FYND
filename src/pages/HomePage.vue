@@ -1,6 +1,5 @@
 <template>
-    <div>
-        <h1>Homepage Component</h1>
+    <div class="vh-100">
         <header>
             <!-- Search Box Here -->
             <BannerVue />

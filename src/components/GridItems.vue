@@ -1,26 +1,35 @@
 <template>
     <div>
 
-        <h1>{{ title }}</h1>
+        <!-- <h1>{{ title }}</h1> -->
 
         <!-- List of Items -->
-        <div class="row justify-content-center gap-3 m-4">
+        <div class="row justify-content-center gap-3">
 
             <!-- Each Item -->
-            <div class="card col-lg-4 col-md-3 col-sm-6" v-for="e in items" :key="e.id" style="width: 18rem;">
+            <div :class="`card p-0 col-lg-4 col-md-3 col-sm-6`" v-for="e in items" :key="e.id" style="width: 18rem;">
 
                 <!-- Item Image -->
-                <img :src="e.image" class="card-img-top" style="max-height: 300px; height: 100%; object-fit: cover; object-position: top;" alt="product-image">
-                <div class="card-body">
+                <img :src="e.image" class="card-img-top m-0 p-2 border"
+                    style="height: 350px; object-fit: cover; object-position: top;" alt="product-image">
+                <div class="card-body bg bg-light">
 
                     <!-- Item Name -->
-                    <h5 class="card-title">{{ e.name }}</h5>
+                    <h5 class="card-title">
+                        <router-link :to="`/app/${title === 'Categories' ? 'category' : 'product'}/${e.id}`">
+                            {{ e.name }}
+                        </router-link>
+                    </h5>
+
+                    <!-- Price -->
+                    <h6 v-if="e.price" class="card-subtitle mb-3">₹ {{ e.price }}</h6>
 
                     <!-- Item Category -->
-                    <h6 v-if="e.category" class="card-subtitle mb-2 text-muted">{{ e.category }}</h6>
+                    <h6 v-if="e.category" class="card-subtitle mb-2 text-muted small">{{ e.category }}</h6>
 
                     <!-- Seller Name -->
-                    <h6 v-if="e.seller" class="card-subtitle mb-2 text-muted">{{ e.seller }}</h6>
+                    <h6 v-if="e.sellerId" class="card-subtitle mb-3 text-muted small">{{ e.sellerId }}</h6>
+
                 </div>
             </div>
 
@@ -60,5 +69,9 @@ export default {
 .item-image {
     height: 70%;
     background-color: lightgreen;
+}
+
+.card-title:hover {
+    color: yellowgreen;
 }
 </style>

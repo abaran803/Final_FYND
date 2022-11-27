@@ -1,6 +1,10 @@
 <template>
     <div>
 
+        <div v-if="loading" class="vh-100 d-flex justify-content-center align-items-center">
+            Loading ...
+        </div>
+
         <!-- Items on the Page -->
         <GridItems title="Categories" :items="categories" />
 
@@ -9,23 +13,25 @@
 
 <script>
 import GridItems from '@/components/GridItems.vue';
-
+import { getAllCategories } from '../services/api.js'
 
 export default {
     name: "CategoriesComp",
     data() {
         return {
-            categories: [
-                { id: 1, image: "https://images-eu.ssl-images-amazon.com/images/G/31/IMG19/Furniture/WFH/QC/lapdesk_440x460.png", name: "Name Here" },
-                { id: 2, image: "https://images-eu.ssl-images-amazon.com/images/G/31/IMG19/Furniture/WFH/QC/lapdesk_440x460.png", name: "Name Here" },
-                { id: 3, image: "https://images-eu.ssl-images-amazon.com/images/G/31/IMG19/Furniture/WFH/QC/lapdesk_440x460.png", name: "Name Here" },
-                { id: 4, image: "https://images-eu.ssl-images-amazon.com/images/G/31/IMG19/Furniture/WFH/QC/lapdesk_440x460.png", name: "Name Here" },
-                { id: 5, image: "https://images-eu.ssl-images-amazon.com/images/G/31/IMG19/Furniture/WFH/QC/lapdesk_440x460.png", name: "Name Here" },
-                { id: 6, image: "https://images-eu.ssl-images-amazon.com/images/G/31/IMG19/Furniture/WFH/QC/lapdesk_440x460.png", name: "Name Here" }
-            ]
+            categories: [],
+            loading: true
         };
     },
-    components: { GridItems }
+    components: { GridItems },
+    async mounted() {
+        try {
+            this.categories = await getAllCategories();
+        } catch (e) {
+            console.log("Error:", e.message);
+        }
+        this.loading = false;
+    }
 }
 
 </script>
@@ -39,11 +45,13 @@ export default {
     justify-content: center;
     gap: 15px;
 }
+
 .category {
     width: 250px;
     height: 250px;
     background-color: lightblue;
 }
+
 .category-image {
     height: 80%;
     background-color: lightgreen;

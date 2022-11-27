@@ -2,7 +2,7 @@
 
     <div>
         <Navbar />
-        <router-view class="container my-4"></router-view>
+        <router-view class="my-4 mx-2" :key="$route.path"></router-view>
         <FooterPart class="bg bg-danger" />
     </div>
 
