@@ -25,6 +25,12 @@ export const uploadBulkData = async (formData) => {
     return data;
 }
 
+export const getProductDetails = async (id) => {
+    const res = await axios.get(`${baseURL}/user/getProductById/${id}`);
+    const data = res.data;
+    return data;
+}
+
 // export const uploadOneProduct = async (formData) => {
     // const res = await axios.post('http://localhost:3000/user/upload/bulk', formData);
     // const data = res.data;

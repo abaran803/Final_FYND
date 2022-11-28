@@ -30,7 +30,7 @@ const checkTrustedUser = (to, from, next) => {
     if(isAuthenticated) {
         next();
     } else {
-        next('/app')
+        next('/app/profile/overview/'+to.params.id)
     }
 
 }
