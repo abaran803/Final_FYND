@@ -11,9 +11,7 @@
                     <div class="col-lg-4 left-side-product-box pb-3">
                         <img :src='banner' class="border p-3">
                         <span class="sub-img">
-                            <img src="http://nicesnippets.com/demo/pd-image2.jpg" @click="changeBanner('http://nicesnippets.com/demo/pd-image2.jpg')" class="border p-2">
-                            <img src="http://nicesnippets.com/demo/pd-image3.jpg" @click="changeBanner('http://nicesnippets.com/demo/pd-image3.jpg')" class="border p-2">
-                            <img src="http://nicesnippets.com/demo/pd-image4.jpg" @click="changeBanner('http://nicesnippets.com/demo/pd-image4.jpg')" class="border p-2">
+                            <img v-for="e in allImages" :key="e" :src="e" @click="changeBanner(e)" class="border p-2">
                         </span>
                     </div>
                     <div class="col-lg-8">
@@ -116,7 +114,8 @@ export default {
             product: {},
             loading: true,
             isTrusted: false,
-            banner: ''
+            banner: '',
+            allImages: []
         }
     },
     methods: {
@@ -125,10 +124,10 @@ export default {
                 const data = await getProductDetails(id);
                 const seller = await getSellerData(data.sellerId);
                 this.product = data;
-                this.banner = data.image
+                this.allImages = data.image.split('|');
+                this.banner = this.allImages[0];
                 this.product.sellerName = seller.data.name;
                 this.isTrusted = seller.data.isTrusted;
-                console.log(this.product, seller.data);
             } catch (e) {
                 console.log("Error:", e.message);
             }
