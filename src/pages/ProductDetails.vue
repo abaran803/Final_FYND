@@ -22,9 +22,12 @@
                                 <div class="col-lg-12">
                                     <span>{{product.category}}</span>
                                     <p class="m-0 p-0">{{product.name}}</p>
-                                    <span class="small">
+                                    <span>
                                         <router-link to="/app/profile/full" class="seller-name">
                                             Seller: {{product.sellerName}}
+                                            <span v-if="isTrusted" class="text text-primary">
+                                                <i class="fa-solid fa-circle-check fa-xs"></i>
+                                            </span>
                                         </router-link>
                                     </span>
                                 </div>
