@@ -1,16 +1,16 @@
 <template>
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <FilterContent class="col-md-3 bg bg-primary" style="min-height: 100vh;" />
             <div class="col-md-10 m-auto text text-center" v-if="loading">Loading...</div>
-            <GridItems v-if="!loading" class="col-md-9" style="min-height: 100vh;" title="Search Results" :items="items" />
+            <SearchResultItems v-if="!loading" class="col-md-9" style="min-height: 100vh;" title="Search Results" :items="items" />
         </div>
     </div>
 </template>
 
 <script>
 import FilterContent from '@/components/FilterContent.vue';
-import GridItems from '@/components/GridItems.vue';
+import SearchResultItems from '@/components/SearchResultItems.vue';
 import { getSellerData, searchProducts } from '@/services/api';
 
 export default {
@@ -22,7 +22,7 @@ export default {
             loading: true
         }
     },
-    components: { FilterContent, GridItems },
+    components: { FilterContent, SearchResultItems },
     methods: {
         async fetchResults() {
             try {

@@ -5,16 +5,16 @@
         <div class="container-fluid" style="max-width: 1200px">
             <div class="col-lg-10 border p-3 main-section bg-white">
                 <div class="hedding m-0 pl-3 pt-0 pb-3">
-                    Home <i class="fa-solid fa-chevron-right"></i> Skirts <i class="fa-solid fa-chevron-right"></i> Women's Velvet Dress
+                    {{product.category}}
                 </div>
                 <div class="row m-0">
-                    <div class="col-lg-4 left-side-product-box pb-3">
+                    <div class="col-lg-5 left-side-product-box pb-3">
                         <img :src='banner' class="border p-3">
-                        <span class="sub-img">
-                            <img v-for="e in allImages" :key="e" :src="e" @click="changeBanner(e)" class="border p-2">
+                        <span class="sub-img" role="button">
+                            <img v-for="e in allImages" :key="e" :src="e.replaceAll(' ','')" @click="changeBanner(e.replaceAll(' ',''))" class="border p-2">
                         </span>
                     </div>
-                    <div class="col-lg-8">
+                    <div class="col-lg-7">
                         <div class="right-side-pro-detail border p-3 m-0">
                             <div class="row">
                                 <div class="col-lg-12">
