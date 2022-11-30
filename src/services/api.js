@@ -36,6 +36,17 @@ export const uploadBulkData = async (formData) => {
     return data;
 }
 
+export const uploadSingleProduct = async (formData) => {
+    const token = localStorage.getItem('isUserExist');
+    const res = await axios.post(`${baseURL}/user/upload/single`, formData, {
+        headers: {
+            Authorization: 'Bearer ' + token //the token is a variable which holds the token
+        }
+    });
+    const data = res.data;
+    return data;
+}
+
 export const getProductDetails = async (id) => {
     const res = await axios.get(`${baseURL}/user/getProductById/${id}`);
     const data = res.data;

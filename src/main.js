@@ -17,3 +17,5 @@ new Vue({
 
 // Remaining Tasks
 // Delete ProductComp
+// Seller id while uploading single product
+// Images of the product

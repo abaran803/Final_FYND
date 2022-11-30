@@ -58,6 +58,7 @@ export default {
                 }
                 
                 localStorage.setItem('isUserExist', data.token);
+                localStorage.setItem('userData', JSON.stringify(data));
                 this.$router.push('/app');
             } catch(e) {
                 console.log("Error:", e.message);
