@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'http://localhost:3000';
+const baseURL = process.env.VUE_APP_BACKEND_URL;
 
 const getSellerData = async (sellerId) => {
     const token = localStorage.getItem('isUserExist');
