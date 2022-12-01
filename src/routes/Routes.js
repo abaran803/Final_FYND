@@ -101,7 +101,7 @@ const routes = [
             ]},
             {path: 'profile/full/:id', component: ProfileFullVue, beforeEnter: checkTrustedUser},
             {path: 'profile/overview/:id', component: ProfileOverviewVue},
-            {path: 'category/:id', component: CategorySingleVue},
+            {path: 'category/:catName', component: CategorySingleVue},
             {path: 'product/:id', component: ProductDetailsVue},
             {path: 'account', component: AccountPersonVue}
         ]

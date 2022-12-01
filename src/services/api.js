@@ -14,7 +14,12 @@ const getSellerData = async (sellerId) => {
 }
 
 export const getAllCategories = async () => {
-    const res = await axios.get(`${baseURL}/user/getAllCategories`);
+    const token = localStorage.getItem('isUserExist');
+    const res = await axios.get(`${baseURL}/user/getAllCategories`, {
+        headers: {
+            Authorization: 'Bearer ' + token //the token is a variable which holds the token
+        }
+    });
     const data = res.data;
     return data;
 }
@@ -31,7 +36,12 @@ export const searchProducts = async (query) => {
 }
 
 export const uploadBulkData = async (formData) => {
-    const res = await axios.post(`${baseURL}/user/upload/bulk`, formData);
+    const token = localStorage.getItem('isUserExist');
+    const res = await axios.post(`${baseURL}/user/upload/bulk`, formData, {
+        headers: {
+            Authorization: 'Bearer ' + token //the token is a variable which holds the token
+        }
+    });
     const data = res.data;
     return data;
 }
@@ -48,19 +58,46 @@ export const uploadSingleProduct = async (formData) => {
 }
 
 export const getProductDetails = async (id) => {
-    const res = await axios.get(`${baseURL}/user/getProductById/${id}`);
+    const token = localStorage.getItem('isUserExist');
+    const res = await axios.get(`${baseURL}/user/getProductById/${id}`, {
+        headers: {
+            Authorization: 'Bearer ' + token //the token is a variable which holds the token
+        }
+    });
+    const data = res.data;
+    return data;
+}
+
+export const getProductByCategoryName = async (cat_name) => {
+    console.log(cat_name);
+    const token = localStorage.getItem('isUserExist');
+    const res = await axios.get(`${baseURL}/user/getProductsByCategory/${cat_name}`, {
+        headers: {
+            Authorization: 'Bearer ' + token //the token is a variable which holds the token
+        }
+    });
     const data = res.data;
     return data;
 }
 
 export const register = async (formData) => {
-    const res = await axios.post(`${baseURL}/auth/register`, formData);
+    const token = localStorage.getItem('isUserExist');
+    const res = await axios.post(`${baseURL}/auth/register`, formData, {
+        headers: {
+            Authorization: 'Bearer ' + token //the token is a variable which holds the token
+        }
+    });
     const data = res.data;
     return data;
 }
 
 export const login = async (formData) => {
-    const res = await axios.post(`${baseURL}/auth/login`, formData);
+    const token = localStorage.getItem('isUserExist');
+    const res = await axios.post(`${baseURL}/auth/login`, formData, {
+        headers: {
+            Authorization: 'Bearer ' + token //the token is a variable which holds the token
+        }
+    });
     return res;
 }
 
