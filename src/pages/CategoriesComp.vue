@@ -6,7 +6,7 @@
         </div>
 
         <!-- Items on the Page -->
-        <GridItems title="Categories" :items="categories" />
+        <GridItems class="my-4" title="Categories" :items="categories" />
 
     </div>
 </template>
