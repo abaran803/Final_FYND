@@ -101,6 +101,16 @@ export const login = async (formData) => {
     return res;
 }
 
+export const getNumberOfProducts = async (count) => {
+    const token = localStorage.getItem('isUserExist');
+    const res = await axios.get(`${baseURL}/user/getNumberOfProduct/${count}`, {
+        headers: {
+            Authorization: 'Bearer ' + token //the token is a variable which holds the token
+        }
+    });
+    return res;
+}
+
 // export const uploadOneProduct = async (formData) => {
 // const res = await axios.post('http://localhost:3000/user/upload/bulk', formData);
 // const data = res.data;
