@@ -8,7 +8,7 @@
             <div v-if="loading">Loading...</div>
             <div v-if="items.length" class="row g-3">
                 <div v-for="item in items" :key="item.id" class="col-md-4">
-                    <div class="card bg">
+                    <router-link style="text-decoration: none; color: inherit;" :to="`/app/product/${item.id}`" class="card bg">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="d-flex flex-row align-items-center time">
                                 <i class="fa fa-clock-o"></i>
@@ -21,10 +21,10 @@
                             <!-- <img src="https://i.imgur.com/TbtwkyW.jpg" width="250"> -->
                         </div>
                         <div class="text-center">
-                            <h5>{{item.name.substr(0, 10)}}{{(item.name.length > 10 ? '...' : '')}}</h5>
-                            <span class="text-success">${{item.price}} value</span>
+                            <h5>{{item.name.substr(0, 20)}}{{(item.name.length > 20 ? '...' : '')}}</h5>
+                            <span class="text-success">₹{{Math.floor(item.price*81)}} value</span>
                         </div>
-                    </div>
+                    </router-link>
                 </div>
             </div>
         </div>
