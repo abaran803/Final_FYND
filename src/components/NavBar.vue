@@ -12,12 +12,16 @@
                 </li>
                 <li class="mx-2">
                     <router-link class="text text-white px-2 py-1 rounded" style="text-decoration: none;"
-                        to="/app/products">Products</router-link>
+                        to="/app/upload/single">Add Products</router-link>
+                </li>
+                <li v-if="userType !== 'basic'" class="mx-2">
+                    <router-link class="text text-white px-2 py-1 rounded" style="text-decoration: none;"
+                        to="/app/upload/bulk">Add Bulk</router-link>
                 </li>
             </ul>
-            <ul type="none">
+            <ul type="none" class="d-flex gap-2">
                 <li>
-                    <div class="input-group input-group-sm flex-nowrap px-3">
+                    <div class="input-group input-group-sm flex-nowrap">
                         <input type="text" class="form-control" v-model="query" @keyup.enter="searchItems" placeholder="Search" aria-label="Search"
                             aria-describedby="addon-wrapping">
                         <span :class="`input-group-text btn btn-primary text text-white ${!query && 'disabled'}`" @click="searchItems" id="addon-wrapping">
@@ -26,7 +30,12 @@
                     </div>
                 </li>
                 <li>
-                    <button @click="userLogout" class="btn btn-sm btn-danger">Logout</button>
+                    <button @click="userLogout" class="btn btn-sm btn-secondary">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </button>
+                </li>
+                <li>
+                    <button class="btn btn-sm btn-danger">Logout</button>
                 </li>
             </ul>
         </div>
@@ -39,7 +48,8 @@ export default {
     name: 'NavBar',
     data() {
         return {
-            query: ''
+            query: '',
+            userType: ''
         }
     },
     methods: {
@@ -53,6 +63,9 @@ export default {
             }
             this.$router.push('/app/search/'+this.query);
         }
+    },
+    created() {
+        this.userType = JSON.parse(localStorage.getItem('userData'))._doc.userType;
     }
 }
 

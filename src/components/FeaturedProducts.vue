@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="container mt-5">
+        <div class="container mt-5" id="featured">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <span>Featured Products</span>
                 <span class="custom-badge text-uppercase">See More</span>
