@@ -18,7 +18,6 @@
                         </div>
                         <div class="text-center p-3">
                             <img :src="item.image" width="250" height="280px">
-                            <!-- <img src="https://i.imgur.com/TbtwkyW.jpg" width="250"> -->
                         </div>
                         <div class="text-center">
                             <h5>{{item.name.substr(0, 20)}}{{(item.name.length > 20 ? '...' : '')}}</h5>

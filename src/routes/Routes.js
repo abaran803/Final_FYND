@@ -4,7 +4,6 @@ import LoginCompVue from '../pages/LoginComp.vue'
 import UserApp from '../components/UserApp.vue'
 import RegistrationCompVue from '../pages/RegistrationComp.vue'
 import CategoriesCompVue from '../pages/CategoriesComp.vue';
-import ProductsCompVue from '../pages/ProductsComp.vue';
 import SearchResultsVue from '../pages/SearchResults.vue';
 import HomePage from '../pages/HomePage.vue';
 import UploadDataVue from '@/components/UploadData.vue';
@@ -93,7 +92,6 @@ const routes = [
         children: [
             {path: '', component: HomePage},
             {path: 'categories', component: CategoriesCompVue}, 
-            {path: 'products', component: ProductsCompVue}, 
             {path: 'search/:id', component: SearchResultsVue},
             {path: 'upload', component: UploadDataVue, children: [
                 {path: 'single', component: UploadSingleVue},

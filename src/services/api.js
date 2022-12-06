@@ -111,6 +111,26 @@ export const getNumberOfProducts = async (count) => {
     return res;
 }
 
+export const getProfileOverview = async (id) => {
+    const token = localStorage.getItem('isUserExist');
+    const res = await axios.get(`${baseURL}/user/profileOverview/${id}`, {
+        headers: {
+            Authorization: 'Bearer ' + token //the token is a variable which holds the token
+        }
+    });
+    return res;
+}
+
+export const getProfileFull = async (id) => {
+    const token = localStorage.getItem('isUserExist');
+    const res = await axios.get(`${baseURL}/user/profileFull/${id}`, {
+        headers: {
+            Authorization: 'Bearer ' + token //the token is a variable which holds the token
+        }
+    });
+    return res;
+}
+
 // export const uploadOneProduct = async (formData) => {
 // const res = await axios.post('http://localhost:3000/user/upload/bulk', formData);
 // const data = res.data;

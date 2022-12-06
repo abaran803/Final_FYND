@@ -16,7 +16,6 @@
                         <button class="btn btn-success mx-2 shadow">Go to Cart</button>
                     </div>
                     <div class="col-md-4 col-sm-7">
-                        <!-- <img class="img-fluid" src="https://toppng.com/uploads/preview/shopping-bag-png-image-shopping-bag-11562901360fkucchjrgm.png" alt=""> -->
                         <lottie-player class="img-fluid"
                             src="https://assets8.lottiefiles.com/private_files/lf30_9kdbftpx.json"
                             background="transparent" speed="0.8" style="width: 350px; height: 350px;" loop
