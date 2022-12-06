@@ -21,16 +21,17 @@
                         </div>
                         <div class="align-items-center align-content-center col-md-3 border-left mt-1">
                             <div class="d-flex flex-row align-items-center">
-                                <h4 class="mr-1">${{ e.price }}</h4>
+                                <h4 class="mr-1">₹{{ Math.floor(e.price*81) }}</h4>
                                 <!-- <span class="strike-text">$20.99</span> -->
                             </div>
                             <h6 class="text-success">Free shipping</h6>
                             <div class="d-flex flex-column mt-4">
-                                <button class="btn btn-primary btn-sm" type="button">
-                                    <router-link :to="`/app/product/${e.id}`" class="text text-white">
+                                <router-link :to="`/app/product/${e.id}`" class="text text-white"
+                                    style="text-decoration: none; color: inherit;">
+                                    <button class="btn btn-primary btn-sm w-100" type="button">
                                         Details
-                                    </router-link>
-                                </button>
+                                    </button>
+                                </router-link>
                                 <button class="btn btn-outline-primary btn-sm mt-2" type="button">Add to
                                     wishlist</button>
                             </div>

@@ -30,7 +30,7 @@
                                     </span>
                                 </div>
                                 <div class="col-lg-12">
-                                    <p class="m-0 p-0 price-pro">₹{{product.price}}</p>
+                                    <p class="m-0 p-0 price-pro">₹{{Math.floor(product.price*81)}}</p>
                                     <hr class="p-0 m-0">
                                 </div>
                                 <div class="col-lg-12 pt-2">
@@ -41,7 +41,7 @@
                                 <div class="col-lg-12 mt-3">
                                     <div class="row">
                                         <div class="col-lg-6 pb-2">
-                                            <a href="#" class="btn btn-danger w-100">Add To Cart</a>
+                                            <div @click="addToCart" class="btn btn-danger w-100">Add To Cart</div>
                                         </div>
                                         <div class="col-lg-6">
                                             <a href="#" class="btn btn-success w-100">Shop Now</a>
@@ -135,6 +135,9 @@ export default {
         },
         changeBanner(newBanner) {
             this.banner = newBanner;
+        },
+        addToCart() {
+            alert('Item added to cart');
         }
     },
     created() {
