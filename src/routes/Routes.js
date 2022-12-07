@@ -15,6 +15,8 @@ import ProfileOverviewVue from '@/pages/ProfileOverview.vue';
 import CategorySingleVue from '@/pages/CategorySingle.vue';
 import ProductDetailsVue from '@/pages/ProductDetails.vue';
 import AccountPersonVue from '@/pages/AccountPerson.vue';
+import CheckoutPageVue from '@/pages/CheckoutPage.vue';
+import CartPage from '@/pages/CartPage.vue';
 
 Vue.use(VueRouter);
 
@@ -103,7 +105,9 @@ const routes = [
             {path: 'profile/overview/:id', component: ProfileOverviewVue},
             {path: 'category/:catName', component: CategorySingleVue},
             {path: 'product/:id', component: ProductDetailsVue},
-            {path: 'account', component: AccountPersonVue}
+            {path: 'account', component: AccountPersonVue},
+            {path: 'checkout', component: CheckoutPageVue},
+            {path: 'cart', component: CartPage}
         ]
     }
 ]

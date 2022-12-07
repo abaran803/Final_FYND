@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <div class="container mydiv">
             <div class="row">
-                <div v-for="e in items" :key="e.id" class="col-md-4 mb-3">
+                <router-link v-for="e in items" :to="`/app/product/${e.id}`" :key="e.id" class="col-md-4 mb-3">
                     <!-- bbb_deals -->
                     <div class="bbb_deals h-100">
                         <div class="bbb_deals_slider_container">
@@ -17,13 +17,13 @@
                                     </div>
                                     <div class="bbb_deals_info_line d-flex flex-row justify-content-start">
                                         <div class="bbb_deals_item_name">{{e.name}}</div>
-                                        <div class="bbb_deals_item_price ml-auto">₹{{e.price}}</div>
+                                        <div class="bbb_deals_item_price ml-3">₹{{Math.floor(e.price*81)}}</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </router-link>
             </div>
         </div>
     </div>
@@ -167,7 +167,7 @@ div {
 .bbb_deals {
     width: 100%;
     margin-right: 7%;
-    padding-top: 80px;
+    padding-top: 25px;
     padding-left: 25px;
     padding-right: 25px;
     padding-bottom: 34px;

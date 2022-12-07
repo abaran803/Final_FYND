@@ -22,20 +22,23 @@
             <ul type="none" class="d-flex gap-2">
                 <li>
                     <div class="input-group input-group-sm flex-nowrap">
-                        <input type="text" class="form-control" v-model="query" @keyup.enter="searchItems" placeholder="Search" aria-label="Search"
-                            aria-describedby="addon-wrapping">
-                        <span :class="`input-group-text btn btn-primary text text-white ${!query && 'disabled'}`" @click="searchItems" id="addon-wrapping">
+                        <input type="text" class="form-control" v-model="query" @keyup.enter="searchItems"
+                            placeholder="Search" aria-label="Search" aria-describedby="addon-wrapping">
+                        <span :class="`input-group-text btn btn-primary text text-white ${!query && 'disabled'}`"
+                            @click="searchItems" id="addon-wrapping">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </span>
                     </div>
                 </li>
                 <li>
-                    <button @click="userLogout" class="btn btn-sm btn-secondary">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                    </button>
+                    <router-link to="/app/cart">
+                        <button class="btn btn-sm btn-secondary">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </button>
+                    </router-link>
                 </li>
                 <li>
-                    <button class="btn btn-sm btn-danger">Logout</button>
+                    <button @click="userLogout" class="btn btn-sm btn-danger">Logout</button>
                 </li>
             </ul>
         </div>
@@ -58,10 +61,10 @@ export default {
             this.$router.push('/login');
         },
         searchItems() {
-            if(!this.query) {
+            if (!this.query) {
                 return;
             }
-            this.$router.push('/app/search/'+this.query);
+            this.$router.push('/app/search/' + this.query);
         }
     },
     created() {
