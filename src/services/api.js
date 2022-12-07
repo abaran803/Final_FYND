@@ -4,7 +4,6 @@ const baseURL = process.env.VUE_APP_BACKEND_URL;
 
 const getSellerData = async (sellerId) => {
     const token = localStorage.getItem('isUserExist');
-    console.log(token);
     const data = await axios.get(`${baseURL}/user/seller/${sellerId}`, {
         headers: {
             Authorization: 'Bearer ' + token //the token is a variable which holds the token
@@ -69,7 +68,6 @@ export const getProductDetails = async (id) => {
 }
 
 export const getProductByCategoryName = async (cat_name) => {
-    console.log(cat_name);
     const token = localStorage.getItem('isUserExist');
     const res = await axios.get(`${baseURL}/user/getProductsByCategory/${cat_name}`, {
         headers: {
@@ -104,6 +102,26 @@ export const login = async (formData) => {
 export const getNumberOfProducts = async (count) => {
     const token = localStorage.getItem('isUserExist');
     const res = await axios.get(`${baseURL}/user/getNumberOfProduct/${count}`, {
+        headers: {
+            Authorization: 'Bearer ' + token //the token is a variable which holds the token
+        }
+    });
+    return res;
+}
+
+export const getCartData = async (id) => {
+    const token = localStorage.getItem('isUserExist');
+    const res = await axios.get(`${baseURL}/user/getCartData/${id}`, {
+        headers: {
+            Authorization: 'Bearer ' + token //the token is a variable which holds the token
+        }
+    });
+    return res;
+}
+
+export const addToCart = async (cartItem) => {
+    const token = localStorage.getItem('isUserExist');
+    const res = await axios.put(`${baseURL}/user/addToCart`, cartItem, {
         headers: {
             Authorization: 'Bearer ' + token //the token is a variable which holds the token
         }

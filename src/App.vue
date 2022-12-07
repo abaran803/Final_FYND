@@ -7,7 +7,11 @@
 <script>
 
 export default {
-  name: 'App'
+  name: 'App',
+  mounted() {
+    const {_doc: data} = JSON.parse(localStorage.getItem('userData'));
+    this.$store.dispatch('fetchCart', data._id)
+  }
 }
 </script>
 

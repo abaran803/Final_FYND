@@ -7,46 +7,24 @@
                         <div class="col">
                             <h4><b>Shopping Cart</b></h4>
                         </div>
-                        <div class="col align-self-center text-right text-muted">3 items</div>
+                        <div class="col align-self-center text-right text-muted">{{ itemData.length }} items</div>
                     </div>
                 </div>
-                <div class="row border-top border-bottom">
+                <div v-for="item in itemData" :key="item._id" class="row border-top border-bottom">
                     <div class="row main align-items-center">
-                        <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/1GrakTl.jpg"></div>
+                        <div class="col-2"><img class="img-fluid" :src="item.image.split('|')[0]"></div>
                         <div class="col">
                             <div class="row text-muted">Shirt</div>
-                            <div class="row">Cotton T-shirt</div>
+                            <div class="row">{{ item.name.slice(0, 15) }}{{ (item.name.length > 15 ? '...' : '') }}
+                            </div>
                         </div>
                         <div class="col">
-                            <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
+                            <button class="bg bg-danger px-2 rounded border text text-white"
+                                @click="decCnt(item.productId)">-</button><a href="#" class="border">{{ item.count
+                                }}</a><button class="bg bg-success px-2 rounded border text text-white"
+                                @click="incCnt(item.productId)">+</button>
                         </div>
-                        <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="row main align-items-center">
-                        <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/ba3tvGm.jpg"></div>
-                        <div class="col">
-                            <div class="row text-muted">Shirt</div>
-                            <div class="row">Cotton T-shirt</div>
-                        </div>
-                        <div class="col">
-                            <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
-                        </div>
-                        <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
-                    </div>
-                </div>
-                <div class="row border-top border-bottom">
-                    <div class="row main align-items-center">
-                        <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/pHQ3xT3.jpg"></div>
-                        <div class="col">
-                            <div class="row text-muted">Shirt</div>
-                            <div class="row">Cotton T-shirt</div>
-                        </div>
-                        <div class="col">
-                            <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
-                        </div>
-                        <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
+                        <div class="col">₹{{ (Math.floor(item.price * 81)) }}<span class="close">&#10005;</span></div>
                     </div>
                 </div>
                 <div class="back-to-shop"><a href="#">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
@@ -82,10 +60,65 @@
 </template>
 
 <script>
+import { getProductDetails } from '@/services/api';
+
 
 export default {
 
-    name: "CartPage"
+    name: "CartPage",
+    data() {
+        return {
+            itemData: []
+        }
+    },
+    methods: {
+        async fetchItemData(items) {
+            const itemsData = [];
+
+            for (let i = 0; i < items.length; i++) {
+                const data = await getProductDetails(items[i].productId);
+                data.count = items[i].count;
+                data.productId = items[i].productId;
+                itemsData.push(data);
+            }
+            this.itemData = itemsData
+        },
+        async changeCnt(prodId, cnt) {
+            const res = await this.$store.dispatch('addToCart', {
+                productId: prodId,
+                count: cnt,
+                buyerId: JSON.parse(localStorage.getItem('userData'))._doc._id
+            });
+            if (!res) throw new Error("Some error occurred");
+            const items = await this.$store.dispatch('fetchCart', JSON.parse(localStorage.getItem('userData'))._doc._id);
+            this.fetchItemData(items);
+            return true;
+        },
+        async incCnt(prodId) {
+            try {
+                const res = await this.changeCnt(prodId, 1);
+                if (!res) throw new Error("Some error occurred");
+                alert('Item Incremented');
+            } catch (e) {
+                alert(e.message);
+            }
+        },
+        async decCnt(prodId) {
+            try {
+                const res = await this.changeCnt(prodId, -1);
+                if (!res) throw new Error("Some error occurred");
+                alert('Item Decremented');
+            } catch (e) {
+                alert(e.message);
+            }
+        }
+    },
+    async mounted() {
+
+        const items = await this.$store.dispatch('fetchCart', JSON.parse(localStorage.getItem('userData'))._doc._id);
+        this.fetchItemData(items);
+
+    }
 
 }
 

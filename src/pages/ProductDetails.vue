@@ -5,24 +5,25 @@
         <div class="container-fluid" style="max-width: 1200px">
             <div class="col-lg-10 border p-3 main-section bg-white">
                 <div class="hedding m-0 pl-3 pt-0 pb-3">
-                    {{product.category}}
+                    {{ product.category }}
                 </div>
                 <div class="row m-0">
                     <div class="col-lg-5 left-side-product-box pb-3">
                         <img :src='banner' class="border p-3">
                         <span class="sub-img" role="button">
-                            <img v-for="e in allImages" :key="e" :src="e.replaceAll(' ','')" @click="changeBanner(e.replaceAll(' ',''))" class="border p-2">
+                            <img v-for="e in allImages" :key="e" :src="e.replaceAll(' ', '')"
+                                @click="changeBanner(e.replaceAll(' ', ''))" class="border p-2">
                         </span>
                     </div>
                     <div class="col-lg-7">
                         <div class="right-side-pro-detail border p-3 m-0">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <span>{{product.category}}</span>
-                                    <p class="m-0 p-0">{{product.name}}</p>
+                                    <span>{{ product.category }}</span>
+                                    <p class="m-0 p-0">{{ product.name }}</p>
                                     <span>
                                         <router-link to="/app/profile/full" class="seller-name">
-                                            Seller: {{product.sellerName}}
+                                            Seller: {{ product.sellerName }}
                                             <span v-if="isTrusted" class="text text-primary">
                                                 <i class="fa-solid fa-circle-check fa-xs"></i>
                                             </span>
@@ -30,12 +31,12 @@
                                     </span>
                                 </div>
                                 <div class="col-lg-12">
-                                    <p class="m-0 p-0 price-pro">₹{{Math.floor(product.price*81)}}</p>
+                                    <p class="m-0 p-0 price-pro">₹{{ Math.floor(product.price * 81) }}</p>
                                     <hr class="p-0 m-0">
                                 </div>
                                 <div class="col-lg-12 pt-2">
                                     <h5>Product Detail</h5>
-                                    <span>{{product.description}}</span>
+                                    <span>{{ product.description }}</span>
                                     <hr class="m-0 pt-2 mt-2">
                                 </div>
                                 <div class="col-lg-12 mt-3">
@@ -136,8 +137,18 @@ export default {
         changeBanner(newBanner) {
             this.banner = newBanner;
         },
-        addToCart() {
-            alert('Item added to cart');
+        async addToCart() {
+            try {
+                const res = await this.$store.dispatch('addToCart', {
+                    productId: this.product.id,
+                    count: 1,
+                    buyerId: JSON.parse(localStorage.getItem('userData'))._doc._id
+                });
+                if(!res) throw new Error("Some error occurred");
+                alert('Item added to cart');
+            } catch(e) {
+                alert(e.message);
+            }
         }
     },
     created() {
