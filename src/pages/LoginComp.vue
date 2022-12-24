@@ -1,5 +1,7 @@
 <template>
     <div>
+        <LoadingOverlay :active="isLoading" />
+        <AlertComp :error="error" :hideAlert="hideAlert" />
         <form class="bg bg-white mx-auto my-4 rounded border" style="max-width: 22rem;" @submit.prevent="loginUser">
             <h3 class="bg bg-primary w-100 px-3 py-2 text text-white">Sign In</h3>
             <div class="p-3">
@@ -24,40 +26,50 @@
 </template>
 
 <script>
+import AlertComp from '@/components/AlertComp.vue';
+import LoadingOverlay from '@/components/LoadingOverlay.vue';
 import { login } from '../services/api';
 
 export default {
-    name: 'LoginComp',
+    name: "LoginComp",
     data() {
         return {
             formDatas: [
-                { label: 'Username/Email', type: 'text', placeholder: 'Enter Username', isRequired: true, id: 'username', model: 'username' },
-                { label: 'Password', type: 'password', placeholder: 'Enter Password', isRequired: true, id: 'pass', model: 'password' },
+                { label: "Username/Email", type: "text", placeholder: "Enter Username", isRequired: true, id: "username", model: "username" },
+                { label: "Password", type: "password", placeholder: "Enter Password", isRequired: true, id: "pass", model: "password" },
             ],
             formData: {
-                username: '',
-                password: ''
-            }
-        }
+                username: "",
+                password: ""
+            },
+            isLoading: false,
+            error: false
+        };
     },
     methods: {
         async loginUser() {
+            this.isLoading = true;
             try {
                 const res = await login(this.formData);
                 const data = res.data;
-
                 if (!res) {
-                    throw new Error('No user found');
+                    throw new Error("No user found");
                 }
-
-                localStorage.setItem('isUserExist', data.token);
-                localStorage.setItem('userData', JSON.stringify(data));
-                this.$router.push('/app');
-            } catch (e) {
+                localStorage.setItem("isUserExist", data.token);
+                localStorage.setItem("userData", JSON.stringify(data));
+                this.$router.push("/app");
+            }
+            catch (e) {
+                this.error = true;
                 console.log("Error:", e.message);
             }
+            this.isLoading = false;
+        },
+        hideAlert() {
+          this.error = false;
         }
-    }
+    },
+    components: { LoadingOverlay, AlertComp }
 }
 
 </script>

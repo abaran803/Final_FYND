@@ -4,6 +4,8 @@
 
 
     <div>
+      <LoadingOverlay :active="isLoading" />
+      <AlertComp :error="error" :success="success" :hideAlert="hideAlert" />
       <form class="bg bg-white mx-auto my-4 rounded border w-75" @submit.prevent="register">
         <h3 class="bg bg-primary w-100 px-3 py-2 text text-white">Registration Form</h3>
         <div class="p-3">
@@ -91,39 +93,55 @@
 </template>
 
 <script>
+import AlertComp from '@/components/AlertComp.vue';
+import LoadingOverlay from '@/components/LoadingOverlay.vue';
 import {register} from '../services/api';
 
 export default {
-    name: 'RegistrationComp',
+    name: "RegistrationComp",
     data() {
         return {
             formData: {
-              name: '',
-              email: '',
-              city: '',
-              pincode: '',
-              mob_no: '',
-              aadhar: '',
-              pan: '',
-              dob: '',
-              gender: '',
-              userType: ''
-            }
-        }
+                name: "",
+                email: "",
+                city: "",
+                pincode: "",
+                mob_no: "",
+                aadhar: "",
+                pan: "",
+                dob: "",
+                gender: "",
+                userType: ""
+            },
+            isLoading: false,
+            error: false,
+            success: false
+        };
     },
     methods: {
         async register() {
-            console.log(this.formData)
+            console.log(this.formData);
+            this.hideAlert();
+            this.isLoading = true;
             try {
                 await register(this.formData);
+                this.success = true;
                 console.log("Registered");
-            } catch(e) {
+            }
+            catch (e) {
+                this.error = true;
                 console.log("Error:", e.message);
             }
+            this.isLoading = false;
             // localStorage.setItem('isUserExist', true);
             // this.$router.push('/app');
+        },
+        hideAlert() {
+          this.error = false;
+          this.success = false;
         }
-    }
+    },
+    components: { LoadingOverlay, AlertComp }
 }
 
 </script>
