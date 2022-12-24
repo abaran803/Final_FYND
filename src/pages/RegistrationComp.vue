@@ -1,100 +1,94 @@
 <template>
   <div>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <!------ Include the above in your HEAD tag ---------->
 
-    <div class="container">
-      <h1 class="well">Registration Form</h1>
-      <div>
-        <router-link to="/login">Already a member | Sign In</router-link>
-      </div>
-      <div class="col-lg-12 well">
-        <div class="row">
-          <form @submit.prevent="register">
-            <div class="col-sm-12">
-              <div class="row">
-                <div class="col-sm-6 form-group">
-                  <label>Name</label>
-                  <input type="text" v-model="formData.name" placeholder="Enter Name Here.." class="form-control">
-                </div>
-                <div class="col-sm-6 form-group">
-                  <label>Email</label>
-                  <input type="email" v-model="formData.email" placeholder="Enter Email Here.." class="form-control">
-                </div>
+
+    <div>
+      <form class="bg bg-white mx-auto my-4 rounded border w-75" @submit.prevent="register">
+        <h3 class="bg bg-primary w-100 px-3 py-2 text text-white">Registration Form</h3>
+        <div class="p-3">
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-sm-6 form-group mb-3">
+                <label>Name</label>
+                <input type="text" v-model="formData.name" placeholder="Enter Name Here.." class="form-control">
               </div>
-              <div class="row">
-                <div class="col-sm-4 form-group">
-                  <label>City</label>
-                  <input type="text" v-model="formData.city" placeholder="Enter City Name Here.." class="form-control">
-                </div>
-                <div class="col-sm-4 form-group">
-                  <label>Pin Code</label>
-                  <input type="number" v-model="formData.pincode" placeholder="Enter Pin Code Here.." class="form-control">
-                </div>
-                <div class="col-sm-4 form-group">
-                  <label>Mobile Number</label>
-                  <input type="number" v-model="formData.mob_no" placeholder="Enter Mobile Number Here.." class="form-control">
-                </div>
+              <div class="col-sm-6 form-group mb-3">
+                <label>Email</label>
+                <input type="email" v-model="formData.email" placeholder="Enter Email Here.." class="form-control">
               </div>
-              <div class="row">
-                <div class="col-sm-6 form-group">
-                  <label>Pan Number</label>
-                  <input type="text" v-model="formData.pan" placeholder="Enter Pan Number Here.." class="form-control">
-                </div>
-                <div class="col-sm-6 form-group">
-                  <label>Aadhar Number</label>
-                  <input type="number" v-model="formData.aadhar" placeholder="Enter Aadhar Number Here.." class="form-control">
-                </div>
-              </div>
-              <div class="row form-group">
-                <div class="col-lg-6">
-                  <label>Gender</label>
-                  <div class="input-group">
-                    <span class="input-group-addon">
-                      <input type="radio" name="gen" v-model="formData.gender" value="Female" aria-label="...">
-                    </span>
-                    <input type="text" class="form-control" aria-label="..." value="Female" disabled>
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <label>&nbsp;</label>
-                  <div class="input-group">
-                    <span class="input-group-addon">
-                      <input type="radio" name="gen" v-model="formData.gender" value="Male" aria-label="...">
-                    </span>
-                    <input type="text" class="form-control" aria-label="..." value="Male" disabled>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-6 form-group">
-                  <label>Date of Birth</label>
-                  <input type="date" v-model="formData.dob" placeholder="Enter Designation Here.." class="form-control">
-                </div>
-                <div class="col-sm-6 form-group">
-                  <label>User Type</label>
-                  <select v-model="formData.userType" class="form-control">
-                    <option value="basic">Basic</option>
-                    <option value="localShopOwner">Local Shpp Owner</option>
-                    <option value="admin">Admin</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label>Password</label>
-                <input type="password" v-model="formData.password" placeholder="Enter Password Here.." class="form-control">
-              </div>
-              <button type="submit" class="btn btn-lg btn-info">Submit</button>
             </div>
-          </form>
+            <div class="row">
+              <div class="col-sm-4 form-group mb-3">
+                <label>City</label>
+                <input type="text" v-model="formData.city" placeholder="Enter City Name Here.." class="form-control">
+              </div>
+              <div class="col-sm-4 form-group mb-3">
+                <label>Pin Code</label>
+                <input type="number" v-model="formData.pincode" placeholder="Enter Pin Code Here.."
+                  class="form-control">
+              </div>
+              <div class="col-sm-4 form-group mb-3">
+                <label>Mobile Number</label>
+                <input type="number" v-model="formData.mob_no" placeholder="Enter Mobile Number Here.."
+                  class="form-control">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6 form-group mb-3">
+                <label>Pan Number</label>
+                <input type="text" v-model="formData.pan" placeholder="Enter Pan Number Here.." class="form-control">
+              </div>
+              <div class="col-sm-6 form-group mb-3">
+                <label>Aadhar Number</label>
+                <input type="number" v-model="formData.aadhar" placeholder="Enter Aadhar Number Here.."
+                  class="form-control">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label>Gender</label>
+                <div class="form-group col-lg-6">
+                  <input class="form-check-input" type="radio" name="gen" v-model="formData.gender" value="Female" aria-label="...">
+                  <label class="form-check-label mx-2" for="flexRadioDefault1">
+                    Female
+                  </label>
+                </div>
+                <div class="form-group col-lg-6">
+                  <input class="form-check-input"  type="radio" name="gen" v-model="formData.gender" value="Male" aria-label="..." checked>
+                  <label class="form-check-label mx-2" for="flexRadioDefault2">
+                    Male
+                  </label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6 form-group mb-3">
+                <label>Date of Birth</label>
+                <input type="date" v-model="formData.dob" placeholder="Enter Designation Here.." class="form-control">
+              </div>
+              <div class="col-sm-6 form-group mb-3">
+                <label>User Type</label>
+                <select v-model="formData.userType" class="form-control">
+                  <option value="basic">Basic</option>
+                  <option value="localShopOwner">Local Shpp Owner</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <label>Password</label>
+              <input type="password" v-model="formData.password" placeholder="Enter Password Here.."
+                class="form-control">
+            </div>
+          </div>
+          <div class="my-2">
+            <div class="form-text small"><router-link to="/login">Already a member | Sign In</router-link></div>
+          </div>
+          <button type="submit" class="btn btn-primary">Register</button>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </template>
-
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <script>
 import {register} from '../services/api';
@@ -121,7 +115,7 @@ export default {
         async register() {
             console.log(this.formData)
             try {
-                const data = await register(this.formData);
+                await register(this.formData);
                 console.log("Registered");
             } catch(e) {
                 console.log("Error:", e.message);

@@ -9,8 +9,9 @@
 export default {
   name: 'App',
   mounted() {
-    const {_doc: data} = JSON.parse(localStorage.getItem('userData'));
-    this.$store.dispatch('fetchCart', data._id)
+    const lc = JSON.parse(localStorage.getItem('userData'))
+    const data = lc && lc["_doc"];
+    data && this.$store.dispatch('fetchCart', data._id)
   }
 }
 </script>
