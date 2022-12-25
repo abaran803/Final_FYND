@@ -1,8 +1,6 @@
 <template>
     <div>
-        <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' rel='stylesheet'>
-        <link href='' rel='stylesheet'>
-        <div class="container-fluid" style="max-width: 1200px">
+        <div class="container-fluid my-3" style="max-width: 1200px">
             <div class="col-lg-10 border p-3 main-section bg-white">
                 <div class="hedding m-0 pl-3 pt-0 pb-3">
                     {{ product.category }}
@@ -98,10 +96,6 @@
         </div>
     </div>
 </template>
-
-<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'></script>
-<script type='text/javascript' src='https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js'></script>
 
 <script>
 import { getProductDetails, getSellerData } from '@/services/api';

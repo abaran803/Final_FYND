@@ -1,7 +1,7 @@
 <template>
     <div class="container">
-        <div class="row">
-            <FilterContent class="col-md-3 bg bg-primary" style="min-height: 100vh;" />
+        <div class="row justify-content-center">
+            <!-- <FilterContent class="col-md-3 bg bg-primary" style="min-height: 100vh;" /> -->
             <div class="col-md-10 m-auto text text-center" v-if="loading">Loading...</div>
             <SearchResultItems v-if="!loading" class="col-md-9" style="min-height: 100vh;" title="Search Results" :items="items" />
         </div>
@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import FilterContent from '@/components/FilterContent.vue';
+// import FilterContent from '@/components/FilterContent.vue';
 import SearchResultItems from '@/components/SearchResultItems.vue';
 import { getSellerData, searchProducts } from '@/services/api';
 
@@ -22,7 +22,7 @@ export default {
             loading: true
         }
     },
-    components: { FilterContent, SearchResultItems },
+    components: { SearchResultItems },
     methods: {
         async fetchResults() {
             try {
