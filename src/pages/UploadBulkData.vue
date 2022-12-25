@@ -3,9 +3,15 @@
         <LoadingOverlay :active="loading" />
         <AlertComp :error="error" :success="success" :hideAlert="hideAlert" />
         <!-- Use Dropzone Here -->
-        Upload JSON File/Excel Sheet here <br>
-        <input type="file" @change="changeFile"><br><br>
-        <button @click="submitFile">Submit File</button>
+        <input class="d-none" type="file" @change="changeFile" ref="input">
+        <div class="d-flex flex-column justify-content-center align-items-center vh-100 px-4 w-100">
+            <div class="bg bg-white d-flex flex-column align-items-center justify-content-center w-100 border rounded" style="max-width: 400px; height: 300px;">
+                <button @click="selectFile" class="btn btn-light">Upload File</button>
+                <label v-if="!uploadFile" class="text-muted mt-2">Upload Excel Sheet here</label>
+                <label v-if="uploadFile" class="text-muted mt-2">{{uploadFile.name}}</label>
+            </div>
+            <button v-if="uploadFile" class="btn btn-primary mt-2 w-100" style="max-width: 400px;" @click="submitFile">Submit File</button>
+        </div>
     </div>
 </template>
 
@@ -44,7 +50,10 @@ export default {
         },
         changeFile(event) {
             this.uploadFile = event.target.files[0];
-            console.log(this.uploadFile);
+            console.log(this.uploadFile.name);
+        },
+        selectFile() {
+            this.$refs.input.click();
         },
         hideAlert() {
             this.error = false;
