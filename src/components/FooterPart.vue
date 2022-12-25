@@ -113,7 +113,7 @@
     <!-- Section: Links  -->
   
     <!-- Copyright -->
-    <div class="text-center p-4 bg bg-white border" style="background-color: rgba(0, 0, 0, 0.05);">
+    <div class="text-center p-4 border-top">
       © 2022 Copyright:
       <a class="text-reset fw-bold" href="https://mdbootstrap.com/">SOX.COM</a>
     </div>

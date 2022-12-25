@@ -2,7 +2,7 @@
     <div>
         <nav class="navbar navbar-dark bg-dark navbar-expand-lg bg-body-tertiary position-sticky top-0">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">SOX</a>
+                <router-link class="navbar-brand" to="/app">SOX</router-link>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -24,14 +24,14 @@
                         </li>
                     </ul>
                     <div class="d-flex gap-2 right-side">
-                        <form class="d-flex mx-1 nav-item" role="search">
+                        <div class="d-flex mx-1 nav-item" role="search">
                             <div class="input-group">
                                 <input v-model="query" @keyup.enter="searchItems" style="max-width: 40vw;" type="text"
                                     class="form-control" placeholder="Search" aria-label="Search">
                                 <span :class="`input-group-text btn btn-primary ${!query && 'disabled'}`"
                                     @click="searchItems"><i class="fa-solid fa-magnifying-glass"></i></span>
                             </div>
-                        </form>
+                        </div>
                         <div class="d-flex">
                             <router-link to="/app/cart" class="mx-1">
                                 <button class="btn btn-secondary">

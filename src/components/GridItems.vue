@@ -16,7 +16,7 @@
 
                     <!-- Item Name -->
                     <h5 class="card-title">
-                        <router-link :to="`/app/${title === 'Categories' ? 'category' : 'product'}/${e.name}`">
+                        <router-link :to="`/app/${title === 'Categories' ? 'category' : 'product'}/${e.name}`" class="text-decoration-none">
                             {{ e.name }}
                         </router-link>
                     </h5>
