@@ -1,47 +1,49 @@
 <template>
-    <div class="bg bg-dark p-2 position-sticky top-0" style="z-index: 9999">
-        <div class="navbar-content m-0">
-            <ul type="none">
-                <li class="mx-2">
-                    <router-link class="text text-white px-2 py-1 rounded" style="text-decoration: none;" to="/app">Home
-                    </router-link>
-                </li>
-                <li class="mx-2">
-                    <router-link class="text text-white px-2 py-1 rounded" style="text-decoration: none;"
-                        to="/app/categories">Categories</router-link>
-                </li>
-                <li class="mx-2">
-                    <router-link class="text text-white px-2 py-1 rounded" style="text-decoration: none;"
-                        to="/app/upload/single">Add Products</router-link>
-                </li>
-                <li v-if="userType !== 'basic'" class="mx-2">
-                    <router-link class="text text-white px-2 py-1 rounded" style="text-decoration: none;"
-                        to="/app/upload/bulk">Add Bulk</router-link>
-                </li>
-            </ul>
-            <ul type="none" class="d-flex gap-2">
-                <li>
-                    <div class="input-group input-group-sm flex-nowrap">
-                        <input type="text" class="form-control" v-model="query" @keyup.enter="searchItems"
-                            placeholder="Search" aria-label="Search" aria-describedby="addon-wrapping">
-                        <span :class="`input-group-text btn btn-primary text text-white ${!query && 'disabled'}`"
-                            @click="searchItems" id="addon-wrapping">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </span>
+    <div>
+        <nav class="navbar navbar-dark bg-dark navbar-expand-lg bg-body-tertiary position-sticky top-0">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">SOX</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-start">
+                        <li class="nav-item">
+                            <router-link class="nav-link active" aria-current="page" to="/app">Home</router-link>
+                        </li>
+                        <li class="nav-item">
+                            <router-link class="nav-link" to="/app/categories">Categories</router-link>
+                        </li>
+                        <li class="nav-item">
+                            <router-link class="nav-link" to="/app/upload/single">Add Products</router-link>
+                        </li>
+                        <li v-if="userType !== 'basic'" class="nav-item">
+                            <router-link class="nav-link" to="/app/upload/bulk">Add Bulk</router-link>
+                        </li>
+                    </ul>
+                    <div class="d-flex gap-2 right-side">
+                        <form class="d-flex mx-1 nav-item" role="search">
+                            <div class="input-group">
+                                <input v-model="query" @keyup.enter="searchItems" style="max-width: 40vw;" type="text"
+                                    class="form-control" placeholder="Search" aria-label="Search">
+                                <span :class="`input-group-text btn btn-primary ${!query && 'disabled'}`"
+                                    @click="searchItems"><i class="fa-solid fa-magnifying-glass"></i></span>
+                            </div>
+                        </form>
+                        <div class="d-flex">
+                            <router-link to="/app/cart" class="mx-1">
+                                <button class="btn btn-secondary">
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                </button>
+                            </router-link>
+                            <button @click="userLogout" class="btn btn-danger mx-1" type="submit">Log Out</button>
+                        </div>
                     </div>
-                </li>
-                <li>
-                    <router-link to="/app/cart">
-                        <button class="btn btn-sm btn-secondary">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                        </button>
-                    </router-link>
-                </li>
-                <li>
-                    <button @click="userLogout" class="btn btn-sm btn-danger">Logout</button>
-                </li>
-            </ul>
-        </div>
+                </div>
+            </div>
+        </nav>
     </div>
 </template>
 
@@ -88,7 +90,15 @@ ul {
     justify-content: space-between;
 }
 
-a:hover {
-    background-color: orange;
+.navbar-nav a:hover {
+    background-color: rgba(255, 247, 232, 0.301);
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .right-side {
+        flex-direction: column;
+        gap: 2rem;
+    }
 }
 </style>
