@@ -1,6 +1,10 @@
 <template>
     <div>
-        <div class="container mydiv">
+        <LoadingOverlay :active="loading" />
+        <AlertComp :error="error" :hideAlert="hideAlert" />
+        <!-- <AlertComp :error="error" :hideAlert="hideAlert" /> -->
+        <div class="col-md-10 m-auto text text-center mt-3" v-if="!items.length && !error">NO ITEM FOUND</div>
+        <div class="container mydiv" style="min-height: 80vh;">
             <div class="row justify-content-center gap-3">
                 <router-link v-for="e in items" :to="`/app/product/${e.id}`" :key="e.id" class="col-md-4 mb-3 text-decoration-none text text-black h-100" style="width: 18rem;">
                     <div class="card w-100">
@@ -20,25 +24,35 @@
 <script>
 import {getProductByCategoryName} from '../services/api';
 
-export default {
+import AlertComp from '@/components/AlertComp.vue';
+import LoadingOverlay from '@/components/LoadingOverlay.vue';
 
-    name: 'CategorySingle',
+export default {
+    name: "CategorySingle",
     data() {
         return {
             items: [],
-            loading: true
+            loading: true,
+            error: false
+        };
+    },
+    methods: {
+        hideAlert() {
+            this.error = false;
         }
     },
     async mounted() {
         try {
             const data = await getProductByCategoryName(this.$route.params.catName);
             this.items = data;
-        } catch(e) {
+        }
+        catch (e) {
+            this.error = true;
             console.log("Error:", e.message);
         }
         this.loading = false;
     },
-
+    components: { LoadingOverlay, AlertComp }
 }
 
 </script>

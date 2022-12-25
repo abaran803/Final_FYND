@@ -1,5 +1,7 @@
 <template>
     <div>
+        <LoadingOverlay :active="loading" />
+        <AlertComp :error="error" :success="success" :hideAlert="hideAlert" />
         <form class="bg bg-white mx-auto my-4 rounded border w-75 pb-3" @submit.prevent="submitForm">
             <h3 class="bg bg-primary w-100 px-3 py-2 text text-white">Upload Product</h3>
             <div class="p-3">
@@ -55,44 +57,58 @@
 </template>
 
 <script>
+import AlertComp from '@/components/AlertComp.vue';
+import LoadingOverlay from '@/components/LoadingOverlay.vue';
 import { uploadSingleProduct } from '@/services/api';
 
 
 export default {
-
-    name: 'UploadSingle',
+    name: "UploadSingle",
     data() {
         return {
             formData: {
-                name: '',
-                category: '',
-                price: '',
-                area: '',
-                description: '',
+                name: "",
+                category: "",
+                price: "",
+                area: "",
+                description: "",
                 image: {}
             },
-            imageName: ''
-        }
+            imageName: "",
+            loading: false,
+            error: false,
+            success: false
+        };
     },
     methods: {
         putImage(event) {
             const newImage = new FormData();
-            newImage.append('file', event.target.files);
+            newImage.append("file", event.target.files);
             this.formData.image = newImage;
-            this.imageName = event.target.value.split('\\').pop();
+            this.imageName = event.target.value.split("\\").pop();
         },
         async submitForm() {
-            this.formData.sellerId = '63849de5014bcb9a04387825';
+            this.hideAlert();
+            this.formData.sellerId = "63849de5014bcb9a04387825";
             // Extract the seller id from localstorage
+            this.loading = true;
             try {
                 const data = await uploadSingleProduct(this.formData);
                 console.log("Uploaded", data);
-            } catch (e) {
+                this.success = true;
+            }
+            catch (e) {
+                this.error = true;
                 console.log("Error:", e.message);
             }
+            this.loading = false;
+        },
+        hideAlert() {
+            this.error = false;
+            this.success = false;
         }
-    }
-
+    },
+    components: { LoadingOverlay, AlertComp }
 }
 
 </script>

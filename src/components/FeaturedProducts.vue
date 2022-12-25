@@ -1,11 +1,13 @@
 <template>
     <div>
         <div class="container mt-5" id="featured">
+            <LoadingOverlay :active="loading" />
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <span>Featured Products</span>
                 <span class="custom-badge text-uppercase">See More</span>
             </div>
-            <div v-if="loading">Loading...</div>
+            <AlertComp :error="error" :hideAlert="hideAlert" />
+            <div v-if="!error && !items.length" class="text text-center p-3 bg bg-white">NO ITEM FOUND</div>
             <div v-if="items.length" class="row gap-3 justify-content-center my-3">
                 <div v-for="item in items" :key="item.id" class="col-md-4" style="width: 20rem;">
                     <router-link style="text-decoration: none; color: inherit;" :to="`/app/product/${item.id}`" class="card bg">
@@ -32,25 +34,37 @@
 
 <script>
 import { getNumberOfProducts } from '@/services/api';
+import AlertComp from './AlertComp.vue';
+import LoadingOverlay from './LoadingOverlay.vue';
 
 
 export default {
-    name: 'FeaturedProducts',
+    name: "FeaturedProducts",
     data() {
         return {
             items: [],
-            loading: true
+            loading: true,
+            error: false
+        };
+    },
+    methods: {
+        hideAlert() {
+            this.error = false;
         }
     },
     async mounted() {
         try {
             const res = await getNumberOfProducts(6);
             this.items = res.data;
-        } catch (e) {
+        }
+        catch (e) {
+            this.error = true;
             console.log("Error:", e.message);
         }
         this.loading = false;
-    }
+        console.log(this.items.length)
+    },
+    components: { LoadingOverlay, AlertComp }
 }
 
 </script>

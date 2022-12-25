@@ -1,9 +1,10 @@
 <template>
-    <div>
+    <div style="min-height: 100vh;">
 
-        <div v-if="loading" class="vh-100 d-flex justify-content-center align-items-center">
-            Loading ...
-        </div>
+        
+        <LoadingOverlay :active="loading" />
+        <AlertComp :error="error" :hideAlert="hideAlert" />
+        <div class="col-md-10 m-auto text text-center mt-3" v-if="!categories.length && !error">NO ITEM FOUND</div>
 
         <!-- Items on the Page -->
         <GridItems class="my-4" title="Categories" :items="categories" />
@@ -12,7 +13,9 @@
 </template>
 
 <script>
+import AlertComp from '@/components/AlertComp.vue';
 import GridItems from '@/components/GridItems.vue';
+import LoadingOverlay from '@/components/LoadingOverlay.vue';
 import { getAllCategories } from '../services/api.js'
 
 export default {
@@ -20,14 +23,21 @@ export default {
     data() {
         return {
             categories: [],
-            loading: true
+            loading: true,
+            error: false
         };
     },
-    components: { GridItems },
+    methods: {
+        hideAlert() {
+            this.error = false;
+        }
+    },
+    components: { GridItems, LoadingOverlay, AlertComp },
     async mounted() {
         try {
             this.categories = await getAllCategories();
         } catch (e) {
+            this.error = true;
             console.log("Error:", e.message);
         }
         this.loading = false;

@@ -1,7 +1,10 @@
 <template>
     <div>
-        <div class="container-fluid my-3" style="max-width: 1200px">
-            <div class="col-lg-10 border p-3 main-section bg-white">
+        <LoadingOverlay :active="loading" />
+        <AlertComp :error="error" :hideAlert="hideAlert" />
+        <div class="container-fluid my-3" style="max-width: 1200px; min-height: 80vh;">
+            <div class="col-md-10 m-auto text text-center mt-3" v-if="Object.keys(product).length == 0 && !error">NO ITEM FOUND</div>
+            <div v-if="Object.keys(product).length != 0" class="col-lg-10 border p-3 main-section bg-white">
                 <div class="hedding m-0 pl-3 pt-0 pb-3">
                     {{ product.category }}
                 </div>
@@ -98,20 +101,22 @@
 </template>
 
 <script>
+import AlertComp from '@/components/AlertComp.vue';
+import LoadingOverlay from '@/components/LoadingOverlay.vue';
 import { getProductDetails, getSellerData } from '@/services/api';
 
 
 export default {
-
-    name: 'ProductDetails',
+    name: "ProductDetails",
     data() {
         return {
             product: {},
             loading: true,
             isTrusted: false,
-            banner: '',
-            allImages: []
-        }
+            banner: "",
+            allImages: [],
+            error: false
+        };
     },
     methods: {
         async fetchProduct(id) {
@@ -119,11 +124,13 @@ export default {
                 const data = await getProductDetails(id);
                 const seller = await getSellerData(data.sellerId);
                 this.product = data;
-                this.allImages = data.image.split('|');
+                this.allImages = data.image.split("|");
                 this.banner = this.allImages[0];
                 this.product.sellerName = seller.data.name;
                 this.isTrusted = seller.data.isTrusted;
-            } catch (e) {
+            }
+            catch (e) {
+                this.error = true;
                 console.log("Error:", e.message);
             }
             this.loading = false;
@@ -131,24 +138,29 @@ export default {
         changeBanner(newBanner) {
             this.banner = newBanner;
         },
+        hideAlert() {
+            this.error = false;
+        },
         async addToCart() {
             try {
-                const res = await this.$store.dispatch('addToCart', {
+                const res = await this.$store.dispatch("addToCart", {
                     productId: this.product.id,
                     count: 1,
-                    buyerId: JSON.parse(localStorage.getItem('userData'))._doc._id
+                    buyerId: JSON.parse(localStorage.getItem("userData"))._doc._id
                 });
-                if(!res) throw new Error("Some error occurred");
-                alert('Item added to cart');
-            } catch(e) {
+                if (!res)
+                    throw new Error("Some error occurred");
+                alert("Item added to cart");
+            }
+            catch (e) {
                 alert(e.message);
             }
         }
     },
     created() {
         this.fetchProduct(this.$route.params.id);
-    }
-
+    },
+    components: { LoadingOverlay, AlertComp }
 }
 
 </script>
