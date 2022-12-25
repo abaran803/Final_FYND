@@ -1,63 +1,56 @@
 <template>
     <div>
-
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet"
-            id="bootstrap-css">
-        <!------ Include the above in your HEAD tag ---------->
-
-        <div class="container">
-            <h1 class="well">Upload Product</h1>
-            <div class="col-lg-12 well">
-                <div class="row">
-                    <form @submit.prevent="submitForm">
-                        <div class="col-sm-12">
-                            <div class="row">
-                                <div class="col-sm-6 form-group">
-                                    <label>Name</label>
-                                    <input type="text" v-model="formData.name" placeholder="Enter Name Here.."
-                                        class="form-control">
-                                </div>
-                                <div class="col-sm-6 form-group">
-                                    <label>Category</label>
-                                    <input type="text" v-model="formData.category" placeholder="Enter Email Here.."
-                                        class="form-control">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6 form-group">
-                                    <label>Price</label>
-                                    <input type="number" v-model="formData.price" placeholder="Enter Name Here.."
-                                        class="form-control">
-                                </div>
-                                <div class="col-sm-6 form-group">
-                                    <label>Area</label>
-                                    <input type="text" v-model="formData.area" placeholder="Enter Email Here.."
-                                        class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Description</label>
-                                <textarea type="email" v-model="formData.description" placeholder="Enter Email Here.."
-                                    rows=5 class="form-control"></textarea>
-                            </div>
-                            <div class="form-group mb-4" style="height: 150px;">
-                                <label>Image</label>
-                                <div @click="$refs.file.click()" class="w-100 h-100 bg bg-white"
-                                    style="display: flex; justify-content: center; cursor: pointer;">
-                                    <div style="display: flex; align-items: center;">
-                                        <button class="btn btn-light btn-lg">Upload File</button>
-                                    </div>
-                                    <input id="files" multiple @change="putImage" ref="file" type="file" class="form-control"
-                                        style="display: none;" />
-                                        <div style="position: absolute;">{{ imageName }}</div>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-lg btn-info mt-5">Submit</button>
+        <form class="bg bg-white mx-auto my-4 rounded border w-75 pb-3" @submit.prevent="submitForm">
+            <h3 class="bg bg-primary w-100 px-3 py-2 text text-white">Upload Product</h3>
+            <div class="p-3">
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-6 form-group mb-3">
+                            <label>Name</label>
+                            <input type="text" v-model="formData.name" placeholder="Enter Name Here.."
+                                class="form-control">
                         </div>
-                    </form>
+                        <div class="col-sm-6 form-group mb-3">
+                            <label>Category</label>
+                            <input type="text" v-model="formData.category" placeholder="Enter Category Here.."
+                                        class="form-control">
+                        </div>
+                    </div>
                 </div>
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-6 form-group mb-3">
+                            <label>Price</label>
+                            <input type="number" v-model="formData.price" placeholder="Enter Price Here.."
+                                class="form-control">
+                        </div>
+                        <div class="col-sm-6 form-group mb-3">
+                            <label>Area</label>
+                            <input type="text" v-model="formData.area" placeholder="Enter Area Here.."
+                                class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 mb-3">
+                    <label>Description</label>
+                    <textarea type="email" v-model="formData.description" placeholder="Product Description..."
+                        rows=5 class="form-control"></textarea>
+                </div>
+                <div class="col-sm-12 mb-3">
+                    <label>Image</label>
+                    <div @click="$refs.file.click()" class="w-100 border"
+                        style="display: flex; justify-content: center; cursor: pointer; height: 150px;">
+                        <div style="display: flex; align-items: center;">
+                            <button class="btn btn-light btn-lg">Upload File</button>
+                        </div>
+                        <input id="files" multiple @change="putImage" ref="file" type="file" class="form-control"
+                            style="display: none;" />
+                        <div style="position: absolute;">{{ imageName }}</div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
             </div>
-        </div>
+        </form>
     </div>
 </template>
 
@@ -94,7 +87,7 @@ export default {
             try {
                 const data = await uploadSingleProduct(this.formData);
                 console.log("Uploaded", data);
-            } catch(e) {
+            } catch (e) {
                 console.log("Error:", e.message);
             }
         }
