@@ -8,7 +8,7 @@
             <div class="row justify-content-center gap-3">
                 <router-link v-for="e in items" :to="`/app/product/${e.id}`" :key="e.id" class="col-md-4 mb-3 text-decoration-none text text-black h-100" style="width: 18rem;">
                     <div class="card w-100">
-                        <img :src="e.image" height="250px" class="card-img-top" alt="...">
+                        <img :src="e.image.split('|')[0]" height="250px" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">{{ e.name.slice(0, 20) }}... </h5>
                             <p class="card-text text-muted">{{ $route.params.catName }}</p>

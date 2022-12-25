@@ -16,7 +16,7 @@
 import AlertComp from '@/components/AlertComp.vue';
 import GridItems from '@/components/GridItems.vue';
 import LoadingOverlay from '@/components/LoadingOverlay.vue';
-import { getAllCategories } from '../services/api.js'
+import { getAllCategories, getProductByCategoryName } from '../services/api.js'
 
 export default {
     name: "CategoriesComp",
@@ -36,6 +36,10 @@ export default {
     async mounted() {
         try {
             this.categories = await getAllCategories();
+            for(let i=0; i<this.categories.length; i++) {
+                const d = await getProductByCategoryName(this.categories[i].name);
+                this.categories[i].image = d.length ? d[0].image.split('|')[0] : 'https://media.istockphoto.com/id/1357365823/vector/default-image-icon-vector-missing-picture-page-for-website-design-or-mobile-app-no-photo.jpg?b=1&s=170667a&w=0&k=20&c=LEhQ7Gji4-gllQqp80hLpQsLHlHLw61DoiVf7XJsSx0=';
+            }
         } catch (e) {
             this.error = true;
             console.log("Error:", e.message);
