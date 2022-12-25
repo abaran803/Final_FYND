@@ -6,8 +6,8 @@
                 <span class="custom-badge text-uppercase">See More</span>
             </div>
             <div v-if="loading">Loading...</div>
-            <div v-if="items.length" class="row g-3">
-                <div v-for="item in items" :key="item.id" class="col-md-4">
+            <div v-if="items.length" class="row gap-3 justify-content-center my-3">
+                <div v-for="item in items" :key="item.id" class="col-md-4" style="width: 20rem;">
                     <router-link style="text-decoration: none; color: inherit;" :to="`/app/product/${item.id}`" class="card bg">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="d-flex flex-row align-items-center time">
@@ -17,10 +17,9 @@
                             <img src="https://i.imgur.com/suuFVrQ.png" width="20">
                         </div>
                         <div class="text-center p-3">
-                            <img :src="item.image" width="250" height="280px">
-                            <!-- <img src="https://i.imgur.com/TbtwkyW.jpg" width="250"> -->
+                            <img :src="item.image" height="300" class="w-100">
                         </div>
-                        <div class="text-center">
+                        <div class="text-left">
                             <h5>{{item.name.substr(0, 20)}}{{(item.name.length > 20 ? '...' : '')}}</h5>
                             <span class="text-success">₹{{Math.floor(item.price*81)}} value</span>
                         </div>
