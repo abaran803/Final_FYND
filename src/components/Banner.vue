@@ -13,7 +13,7 @@
                                 Start Shopping
                             </button>
                         </a>
-                        <button class="btn btn-success mx-2 shadow">Go to Cart</button>
+                        <button class="btn btn-success mx-2 shadow" @click="$router.push('/app/cart')">Go to Cart</button>
                     </div>
                     <div class="col-md-4 col-sm-7">
                         <!-- <img class="img-fluid" src="https://toppng.com/uploads/preview/shopping-bag-png-image-shopping-bag-11562901360fkucchjrgm.png" alt=""> -->

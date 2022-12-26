@@ -34,7 +34,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="back-to-shop"><a href="#">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
+                <div class="back-to-shop"><router-link to="/app">&leftarrow;</router-link><span class="text-muted">Back to shop</span></div>
             </div>
             <div class="col-md-4 summary">
                 <div>
