@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="container mt-5" id="featured">
+        <div class="container mt-5 py-2" id="featured">
             <LoadingOverlay :active="loading" />
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <span>Featured Products</span>
@@ -8,8 +8,8 @@
             </div>
             <AlertComp :error="error" :hideAlert="hideAlert" />
             <div v-if="!error && !items.length" class="text text-center p-3 bg bg-white">NO ITEM FOUND</div>
-            <div v-if="items.length" class="row gap-3 justify-content-center my-3">
-                <div v-for="item in items" :key="item.id" class="col-md-4" style="width: 20rem;">
+            <div v-if="items.length" class="row justify-content-center my-3">
+                <div v-for="item in items" :key="item.id" class="col-md-4 mb-4" style="min-width: 20rem;">
                     <router-link style="text-decoration: none; color: inherit;" :to="`/app/product/${item.id}`" class="card bg">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="d-flex flex-row align-items-center time">
