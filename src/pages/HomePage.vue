@@ -2,7 +2,8 @@
     <div class="my-0">
         <header>
             <!-- Search Box Here -->
-            <BannerVue />
+            <BannerVue :scrollToFeatured="scrollToFeatured" />
+            <div ref="featured"></div>
             <FeaturedProducts />
         </header>
     </div>
@@ -15,7 +16,12 @@ import FeaturedProducts from '@/components/FeaturedProducts.vue';
 
 export default {
     name: "HomePage",
-    components: { BannerVue, FeaturedProducts }
+    components: { BannerVue, FeaturedProducts },
+    methods: {
+        scrollToFeatured() {
+            this.$refs["featured"].scrollIntoView({ behavior: "smooth" })
+        }
+    }
 }
 
 </script>

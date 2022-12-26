@@ -8,11 +8,11 @@
                         <p class="w-75 my-3">A perfect place to buy/sell reusable products without any tension of
                             security and payments. All the authenticated buyers and sellers and payment is safely done
                             on the platform</p>
-                        <a href="#featured" class="text text-white" style="text-decoration: none;">
+                        <span @click="scrollToFeatured" class="text text-white" style="text-decoration: none;">
                             <button class="btn btn-primary shadow">
                                 Start Shopping
                             </button>
-                        </a>
+                        </span>
                         <button class="btn btn-success mx-2 shadow" @click="$router.push('/app/cart')">Go to Cart</button>
                     </div>
                     <div class="col-md-4 col-sm-7">
@@ -31,7 +31,10 @@
 <script>
 
 export default {
-    name: 'BannerVue'
+    name: 'BannerVue',
+    props: {
+        scrollToFeatured: Function
+    }
 }
 
 </script>
