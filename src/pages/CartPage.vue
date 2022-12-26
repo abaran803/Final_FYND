@@ -29,7 +29,7 @@
                                     }}</a><button class="bg bg-success px-2 rounded border text text-white"
                                     @click="incCnt(item.productId)">+</button>
                             </div>
-                            <div class="col">₹{{ (Math.floor(item.price * 81)) }}<span class="close">&#10005;</span>
+                            <div class="col">₹{{ (Math.floor(item.price * 81)) }}<span class="close" role="button" @click="changeCnt(item.productId, -1*item.count)">&#10005;</span>
                             </div>
                         </div>
                     </div>
